@@ -1,10 +1,6 @@
 package com.reddit.RedditClone.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 
 @Builder
 public class CommunityDTO {

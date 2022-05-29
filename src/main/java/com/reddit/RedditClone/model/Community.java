@@ -29,8 +29,9 @@ public class Community {
 	@Column(nullable = false)
 	private String description;
     @OneToMany(fetch = LAZY)
-    private List<Post> posts;
-    @Column(nullable = false)
+	private List<Post> posts;
+
+	@Column(nullable = false)
     private String creationDate;
     private String suspendedReason;
 

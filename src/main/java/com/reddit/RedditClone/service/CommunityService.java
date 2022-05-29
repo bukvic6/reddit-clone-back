@@ -14,21 +14,17 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 @Slf4j
 public class CommunityService {
-	
-	@Autowired 
+
+	@Autowired
 	private CommunityRepository communityRepository;
-	
-	
-	public void save(CommunityDTO communityDTO) {
-		Community save = communityRepository.save(mapCommunityDTO(communityDTO));
-		communityDTO.setId(save.getId());
-		return communityDTO
-		
-	}
-	
-	private void mapCommunityDTO(CommunityDTO communityDTO) {
-		Community.Builder().name(communityDTO.getName())
-		.description(communityDTO.getDescription()).build();
+
+
+	public Community save(Community community){
+		try{
+			return communityRepository.save(community);
+		}catch (IllegalArgumentException e){
+			return null;
+		}
 	}
 
-}
+ }

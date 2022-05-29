@@ -1,5 +1,6 @@
 package com.reddit.RedditClone.controller;
 
+import com.reddit.RedditClone.model.Community;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,13 +20,20 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 @Slf4j
 public class CommunityController {
-	
+
 	@Autowired
 	private CommunityService communityService;
-	
-    @PostMapping
-    public ResponseEntity<CommunityDTO> createSubreddit(@RequestBody CommunityDTO communityDTO) {
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(communityService.save(communityDTO));
-    }
-    }
+	@PostMapping("/create")
+	public ResponseEntity<Community> create(@RequestBody Community community){
+		community.setCreationDate("datum");
+		Community createdCommunity = communityService.save(community);
+
+		if(createdCommunity == null){
+			return new ResponseEntity<>(null,HttpStatus.NOT_ACCEPTABLE);
+		}
+		return new ResponseEntity<>(createdCommunity, HttpStatus.OK);
+	}
+
+}
+
+
