@@ -34,7 +34,4 @@ public class Community {
 	@Column(nullable = false)
     private String creationDate;
     private String suspendedReason;
-
-	
-
 }
