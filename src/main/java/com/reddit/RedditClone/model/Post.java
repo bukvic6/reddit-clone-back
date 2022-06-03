@@ -24,4 +24,11 @@ public class Post {
     private String text;
     private LocalDate creationDate;
     private String imagePath;
+
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "community_id")
+    private Community community;
+
+
 }

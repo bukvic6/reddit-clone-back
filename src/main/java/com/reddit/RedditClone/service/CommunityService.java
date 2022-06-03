@@ -33,4 +33,7 @@ public class CommunityService {
 		return communityRepository.findAll();
 	}
 
- }
+	public Community findOneById(Long id) {
+		return communityRepository.findOneById(id);
+	}
+}

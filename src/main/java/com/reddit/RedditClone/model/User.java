@@ -11,6 +11,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 
 @Setter
 @Getter
@@ -33,4 +35,5 @@ public class User {
 	private String avatar;
 	private String description;
 	private String displayName;
+	private LocalDate creationDate;
 }

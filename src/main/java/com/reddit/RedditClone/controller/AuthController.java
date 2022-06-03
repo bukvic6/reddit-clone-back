@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.reddit.RedditClone.dto.RegisterRequest;
 import com.reddit.RedditClone.service.AuthService;
 
+import java.time.LocalDate;
+
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -20,6 +22,7 @@ public class AuthController {
 	
 	@PostMapping("/signup")
 	public ResponseEntity<String>signup(@RequestBody RegisterRequest registerRequest) {
+
 		authService.signup(registerRequest);
 		return new ResponseEntity<>("User registration successful", HttpStatus.OK);
 	}

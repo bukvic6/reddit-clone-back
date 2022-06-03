@@ -9,6 +9,8 @@ import com.reddit.RedditClone.dto.RegisterRequest;
 import com.reddit.RedditClone.model.User;
 import com.reddit.RedditClone.repository.UserRepository;
 
+import java.time.LocalDate;
+
 @Service
 public class AuthService {
 	
@@ -22,11 +24,13 @@ public class AuthService {
 	public void signup(RegisterRequest registerRequest) {
 		User user = new User();
 
-	       user.setUsername(registerRequest.getUsername());
-	        user.setEmail(registerRequest.getEmail());
-	        user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
+		LocalDate lt = LocalDate.now();
+		user.setCreationDate(lt);
+		user.setUsername(registerRequest.getUsername());
+		user.setEmail(registerRequest.getEmail());
+		user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
 		
-	        userRepository.save(user);	
+		userRepository.save(user);
 	}
 
 }

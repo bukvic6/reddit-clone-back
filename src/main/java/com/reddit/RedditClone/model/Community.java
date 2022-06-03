@@ -1,11 +1,6 @@
 package com.reddit.RedditClone.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +8,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import static javax.persistence.FetchType.LAZY;
 
+import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -28,10 +26,11 @@ public class Community {
     private String name;
 	@Column(nullable = false)
 	private String description;
-    @OneToMany(fetch = LAZY)
-	private List<Post> posts;
+
+    @OneToMany(mappedBy = "community",fetch = LAZY,  cascade = CascadeType.ALL)
+	private Set<Post> posts = new HashSet<Post>();
 
 	@Column(nullable = false)
-    private String creationDate;
+    private LocalDate creationDate;
     private String suspendedReason;
 }
