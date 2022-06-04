@@ -2,19 +2,13 @@ package com.reddit.RedditClone.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.reddit.RedditClone.dto.CommunityDTO;
 import com.reddit.RedditClone.model.Community;
 import com.reddit.RedditClone.repository.CommunityRepository;
 
-import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 
 @Service
-@AllArgsConstructor
-@Slf4j
 public class CommunityService {
 
 	@Autowired
@@ -33,7 +27,10 @@ public class CommunityService {
 		return communityRepository.findAll();
 	}
 
-	public Community findOneById(Long id) {
+	public Community findOneById(Long id){
 		return communityRepository.findOneById(id);
 	}
+	//public Community findOneById(Long communityId) {
+	//	return communityRepository.findOneById(communityId);
+	//}
 }

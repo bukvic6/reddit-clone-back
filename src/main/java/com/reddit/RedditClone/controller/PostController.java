@@ -25,7 +25,7 @@ public class PostController {
     @Autowired
     private CommunityService communityService;
 
-    @PostMapping("/createPost")
+    @PostMapping(consumes = "application/json")
     public ResponseEntity<PostDTO>createPost(@RequestBody PostDTO postDTO){
         if(postDTO.getCommunity() == null){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -33,7 +33,7 @@ public class PostController {
         Community community = communityService.findOneById(postDTO.getCommunity().getId());
 
         if(community == null){
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         }
         Post post = new Post();
         post.setTitle(postDTO.getTitle());
@@ -42,9 +42,11 @@ public class PostController {
         LocalDate lt = LocalDate.now();
         post.setCreationDate(lt);
         post.setCommunity(community);
+        community.addPost(post);
 
         post = postService.save(post);
         return new ResponseEntity<>(new PostDTO(post), HttpStatus.CREATED);
     }
+    
 
 }

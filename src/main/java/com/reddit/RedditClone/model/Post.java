@@ -12,9 +12,6 @@ import static javax.persistence.FetchType.LAZY;
 
 @Data
 @Entity
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 public class Post {
 
     @Id
@@ -25,10 +22,18 @@ public class Post {
     private LocalDate creationDate;
     private String imagePath;
 
+    public Post(){}
+
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "community_id")
+    @JoinColumn(name = "community_Id")
     private Community community;
 
 
+    public Community getCommunity(){
+        return community;
+    }
+    public void setCommunity(Community community) {
+        this.community = community;
+    }
 }
