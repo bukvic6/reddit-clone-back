@@ -8,12 +8,11 @@ import com.reddit.RedditClone.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "api/posts")
@@ -47,6 +46,16 @@ public class PostController {
         post = postService.save(post);
         return new ResponseEntity<>(new PostDTO(post), HttpStatus.CREATED);
     }
-    
+    @GetMapping(value = "/all")
+    public ResponseEntity<List<PostDTO>> getAllPosts(){
+        List<Post> posts = postService.findAll();
+
+        List<PostDTO> postDTOS = new ArrayList<>();
+        for (Post p : posts){
+            postDTOS.add(new PostDTO(p));
+        }
+        return new ResponseEntity<>(postDTOS,HttpStatus.OK);
+    }
+
 
 }
