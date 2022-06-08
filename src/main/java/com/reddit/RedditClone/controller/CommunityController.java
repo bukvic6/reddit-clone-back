@@ -41,6 +41,16 @@ public class CommunityController {
 		return new ResponseEntity<>(communityService.getAll(), HttpStatus.OK);
 	}
 
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<CommunityDTO>getCommunity(@PathVariable Long id){
+		Community community = communityService.findOneById(id);
+		if (community == null){
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(new CommunityDTO(community), HttpStatus.OK);
+
+	}
+
 	
 }
 
