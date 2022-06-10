@@ -30,7 +30,9 @@ public class CommunityService {
 	public Community findOneById(Long id){
 		return communityRepository.findOneById(id);
 	}
-	//public Community findOneById(Long communityId) {
+
+
+    //public Community findOneById(Long communityId) {
 	//	return communityRepository.findOneById(communityId);
 	//}
 }

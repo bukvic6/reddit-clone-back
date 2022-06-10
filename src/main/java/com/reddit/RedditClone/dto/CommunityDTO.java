@@ -13,8 +13,6 @@ public class CommunityDTO {
 
 	private String description;
 
-	private LocalDate creationDate;
-	private String suspendedReason;
 
 	public CommunityDTO(){
 
@@ -44,34 +42,16 @@ public class CommunityDTO {
 		this.description = description;
 	}
 
-	public LocalDate getCreationDate() {
-		return creationDate;
-	}
-
-	public void setCreationDate(LocalDate creationDate) {
-		this.creationDate = creationDate;
-	}
-
-	public String getSuspendedReason() {
-		return suspendedReason;
-	}
-
-	public void setSuspendedReason(String suspendedReason) {
-		this.suspendedReason = suspendedReason;
-	}
-
 
 	public CommunityDTO(Community community) {
-		this(community.getId(), community.getName(), community.getDescription(), community.getSuspendedReason(),community.getCreationDate());
+		this(community.getId(), community.getName(), community.getDescription());
 	}
 
-	public CommunityDTO(Long id, String name, String description, String suspendedReason, LocalDate creationDate) {
+	public CommunityDTO(Long id, String name, String description) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
-		this.suspendedReason = suspendedReason;
-		this.creationDate = creationDate;
 
 	}
 }

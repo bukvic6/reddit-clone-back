@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -37,8 +38,15 @@ public class CommunityController {
 
 	}
 	@GetMapping
-	public ResponseEntity<List<Community>> getAll(){
-		return new ResponseEntity<>(communityService.getAll(), HttpStatus.OK);
+	public ResponseEntity<List<CommunityDTO>> getAll(){
+		List<Community>communities = communityService.getAll();
+
+		List<CommunityDTO> communityDTOS = new ArrayList<>();
+		for (Community  c : communities){
+			communityDTOS.add(new CommunityDTO(c));
+		}
+		return new ResponseEntity<>(communityDTOS, HttpStatus.OK);
+
 	}
 
 	@GetMapping(value = "/{id}")
