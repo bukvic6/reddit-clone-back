@@ -31,6 +31,10 @@ public class CommunityService {
 		return communityRepository.findOneById(id);
 	}
 
+    public void remove(Long id) {
+		communityRepository.deleteById(id);
+    }
+
 
     //public Community findOneById(Long communityId) {
 	//	return communityRepository.findOneById(communityId);

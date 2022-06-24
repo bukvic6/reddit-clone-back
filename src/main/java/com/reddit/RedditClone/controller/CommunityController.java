@@ -58,6 +58,30 @@ public class CommunityController {
 		return new ResponseEntity<>(new CommunityDTO(community), HttpStatus.OK);
 
 	}
+	@GetMapping(consumes = "application/json")
+	public ResponseEntity<CommunityDTO> updateCommunity(@RequestBody CommunityDTO communityDTO){
+		Community community = communityService.findOneById(communityDTO.getId());
+		if (community == null ){
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		community.setDescription(communityDTO.getDescription());
+		community.setName(communityDTO.getName());
+
+		community = communityService.save(community);
+		return new ResponseEntity<>(new CommunityDTO(community), HttpStatus.OK);
+	}
+
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<Void> deleteCommunity(@PathVariable Long id){
+		Community community = communityService.findOneById(id);
+		if(community != null){
+			communityService.remove(id);
+			return new ResponseEntity<>(HttpStatus.OK);
+
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
 
 	
 }

@@ -18,7 +18,7 @@ import java.time.LocalDate;
 import static com.reddit.RedditClone.model.ReactionType.UPVOTE;
 
 @RestController
-@RequestMapping(value = "/api/votes")
+@RequestMapping(value = "/api/reaction")
 public class ReactionController {
 
     @Autowired

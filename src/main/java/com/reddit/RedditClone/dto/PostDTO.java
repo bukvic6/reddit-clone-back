@@ -10,16 +10,25 @@ public class PostDTO {
     private String title;
     private String text;
     private String imagePath;
+    private Integer karma;
     private CommunityDTO community;
 
     public PostDTO() {
     }
 
+    public Integer getKarma() {
+        return karma;
+    }
+
+    public void setKarma(Integer karma) {
+        this.karma = karma;
+    }
 
     public PostDTO(Post post){
         id = post.getPostId();
         title = post.getTitle();
         text = post.getText();
+        karma = post.getKarma();
         imagePath = post.getImagePath();
         community = new CommunityDTO(post.getCommunity());
 

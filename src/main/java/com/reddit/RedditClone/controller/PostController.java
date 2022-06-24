@@ -57,5 +57,28 @@ public class PostController {
         return new ResponseEntity<>(postDTOS,HttpStatus.OK);
     }
 
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> deletePost(@PathVariable Long id){
+        Post post = postService.findOneById(id);
+        if(post != null) {
+            postService.remove(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 
+    @PutMapping(consumes = "application/json")
+        public ResponseEntity<PostDTO> updatePost(@RequestBody PostDTO postDTO){
+
+        Post post = postService.findOneById(postDTO.getId());
+        if(post == null){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        post.setTitle(postDTO.getTitle());
+        post.setText(postDTO.getText());
+
+        post = postService.save(post);
+        return new ResponseEntity<>(new PostDTO(post),HttpStatus.OK);
+    }
 }
