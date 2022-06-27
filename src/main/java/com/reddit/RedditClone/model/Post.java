@@ -24,8 +24,6 @@ public class Post {
     private String text;
     private LocalDate creationDate;
     private String imagePath;
-
-
     private Integer karma = 0;
 
     public Post(){}

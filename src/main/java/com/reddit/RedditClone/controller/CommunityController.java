@@ -58,9 +58,9 @@ public class CommunityController {
 		return new ResponseEntity<>(new CommunityDTO(community), HttpStatus.OK);
 
 	}
-	@GetMapping(consumes = "application/json")
-	public ResponseEntity<CommunityDTO> updateCommunity(@RequestBody CommunityDTO communityDTO){
-		Community community = communityService.findOneById(communityDTO.getId());
+	@PutMapping(value = "/edit/{id}")
+	public ResponseEntity<CommunityDTO> updateCommunity(@PathVariable Long id,@RequestBody CommunityDTO communityDTO){
+		Community community = communityService.findOneById(id);
 		if (community == null ){
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}

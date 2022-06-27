@@ -3,8 +3,10 @@ package com.reddit.RedditClone.controller;
 import com.reddit.RedditClone.dto.ReactionDTO;
 import com.reddit.RedditClone.model.Post;
 import com.reddit.RedditClone.model.Reaction;
+import com.reddit.RedditClone.model.User;
 import com.reddit.RedditClone.service.PostService;
 import com.reddit.RedditClone.service.ReactionService;
+import com.reddit.RedditClone.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +27,9 @@ public class ReactionController {
     private ReactionService reactionService;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     private PostService postService;
 
     @PostMapping(consumes = "application/json")
@@ -36,6 +41,12 @@ public class ReactionController {
         if (post == null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+        Long id = Long.valueOf(1);
+        Reaction reac = reactionService.findByUserId(id);
+        if(reac != null){
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+
+        }
         if(UPVOTE.equals(reactionDTO.getType())){
             post.setKarma(post.getKarma() + 1);
         } else {
@@ -43,10 +54,13 @@ public class ReactionController {
         }
         postService.save(post);
 
+        User user = userService.findByUsername("jova");
+
         Reaction reaction = new Reaction();
         LocalDate lt = LocalDate.now();
         reaction.setTimestamp(lt);
         reaction.setType(reactionDTO.getType());
+        reaction.setUser(user);
         reaction = reactionService.save(reaction);
         return new ResponseEntity<>(new ReactionDTO(reaction), HttpStatus.CREATED);
     }

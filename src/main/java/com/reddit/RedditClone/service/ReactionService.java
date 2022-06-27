@@ -35,4 +35,7 @@ public class ReactionService {
             return null;
         }
     }
+    public Reaction findByUserId(Long id){
+        return reactionRepository.findByUserId(id);
+    }
 }

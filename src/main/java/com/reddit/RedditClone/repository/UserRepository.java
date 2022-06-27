@@ -10,4 +10,7 @@ import com.reddit.RedditClone.model.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
+
+    Optional<User> findFirstByUsername(String username);
+
 }

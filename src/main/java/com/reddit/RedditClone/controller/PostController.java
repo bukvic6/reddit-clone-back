@@ -1,5 +1,6 @@
 package com.reddit.RedditClone.controller;
 
+import com.reddit.RedditClone.dto.CommunityDTO;
 import com.reddit.RedditClone.dto.PostDTO;
 import com.reddit.RedditClone.model.Community;
 import com.reddit.RedditClone.model.Post;
@@ -67,11 +68,20 @@ public class PostController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<PostDTO>getPost(@PathVariable Long id){
+        Post post = postService.findOneById(id);
+        if (post == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(new PostDTO(post), HttpStatus.OK);
 
-    @PutMapping(consumes = "application/json")
-        public ResponseEntity<PostDTO> updatePost(@RequestBody PostDTO postDTO){
+    }
 
-        Post post = postService.findOneById(postDTO.getId());
+    @PutMapping(value = "/edit/{id}")
+        public ResponseEntity<PostDTO> updatePost(@PathVariable Long id,@RequestBody PostDTO postDTO){
+
+        Post post = postService.findOneById(id);
         if(post == null){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

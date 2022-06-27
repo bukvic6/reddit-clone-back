@@ -17,7 +17,8 @@ public class Reaction {
     private Long reactionId;
     private ReactionType type;
     private LocalDate timestamp;
-
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId", referencedColumnName = "Id")
+    private User user;
 
 }
