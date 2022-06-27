@@ -42,7 +42,7 @@ public class ReactionController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         Long id = Long.valueOf(1);
-        Reaction reac = reactionService.findByUserId(id);
+        Reaction reac = reactionService.findByUserId(post.getPostId(),id);
         if(reac != null){
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
 
@@ -61,6 +61,7 @@ public class ReactionController {
         reaction.setTimestamp(lt);
         reaction.setType(reactionDTO.getType());
         reaction.setUser(user);
+        reaction.setPost(post);
         reaction = reactionService.save(reaction);
         return new ResponseEntity<>(new ReactionDTO(reaction), HttpStatus.CREATED);
     }

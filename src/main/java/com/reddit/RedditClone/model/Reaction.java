@@ -21,4 +21,8 @@ public class Reaction {
     @JoinColumn(name = "userId", referencedColumnName = "Id")
     private User user;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "postId", referencedColumnName = "postId")
+    private Post post;
+
 }

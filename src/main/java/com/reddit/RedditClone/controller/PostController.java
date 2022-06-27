@@ -58,6 +58,17 @@ public class PostController {
         return new ResponseEntity<>(postDTOS,HttpStatus.OK);
     }
 
+    @GetMapping(value = "/communityPosts/{id}")
+    public ResponseEntity<List<PostDTO>> getCommunityPosts(@PathVariable Long id){
+        List<Post> posts = postService.findAllByCommunity(id);
+
+        List<PostDTO> postDTOS = new ArrayList<>();
+        for (Post p : posts){
+            postDTOS.add(new PostDTO(p));
+        }
+        return new ResponseEntity<>(postDTOS,HttpStatus.OK);
+    }
+
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deletePost(@PathVariable Long id){
         Post post = postService.findOneById(id);

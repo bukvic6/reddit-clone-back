@@ -28,4 +28,8 @@ public class PostService {
     public void remove(Long id) {
         postRepository.deleteById(id);
     }
+
+    public List<Post> findAllByCommunity(Long id) {
+        return postRepository.findAllByCommunity(id);
+    }
 }

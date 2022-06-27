@@ -12,6 +12,6 @@ import java.util.Optional;
 
 public interface ReactionRepository extends JpaRepository<Reaction, Long> {
 
-    @Query("select r from Reaction r where r.user.Id=?1")
-     public Reaction findByUserId(Long id);
+    @Query("select r from Reaction r where r.post.postId=?1 and r.user.Id=?2")
+     public Reaction findByUserId(Long postId, Long id);
 }
