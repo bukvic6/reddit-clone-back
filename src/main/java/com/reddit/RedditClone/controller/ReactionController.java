@@ -50,6 +50,7 @@ public class ReactionController {
         if(UPVOTE.equals(reactionDTO.getType())){
             post.setKarma(post.getKarma() + 1);
         } else {
+
             post.setKarma(post.getKarma() - 1);
         }
         postService.save(post);

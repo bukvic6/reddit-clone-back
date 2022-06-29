@@ -1,5 +1,6 @@
 package com.reddit.RedditClone.service;
 
+import com.reddit.RedditClone.model.Admin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class AuthService {
 	
 	@Transactional
 	public void signup(RegisterRequest registerRequest) {
-		User user = new User();
+		User user = new Admin();
 
 		LocalDate lt = LocalDate.now();
 		user.setCreationDate(lt);
