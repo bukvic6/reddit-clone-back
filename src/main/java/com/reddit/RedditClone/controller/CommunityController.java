@@ -2,6 +2,8 @@ package com.reddit.RedditClone.controller;
 
 import com.reddit.RedditClone.dto.CommunityDTO;
 import com.reddit.RedditClone.model.Community;
+import com.reddit.RedditClone.model.User;
+import com.reddit.RedditClone.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +28,10 @@ public class CommunityController {
 
 	@Autowired
 	private CommunityService communityService;
+
+	@Autowired
+	private UserService userService;
+
 	@PostMapping("/create")
 	public ResponseEntity<CommunityDTO> create(@RequestBody CommunityDTO communityDTO){
 		Community community = new Community();
@@ -33,6 +39,8 @@ public class CommunityController {
 		community.setCreationDate(lt);
 		community.setName(communityDTO.getName());
 		community.setDescription(communityDTO.getDescription());
+		User user = userService.findByUsername("jova");
+		community.setUser(user);
 		community = communityService.save(community);
 		return new ResponseEntity<>(new CommunityDTO(community), HttpStatus.CREATED);
 

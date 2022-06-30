@@ -4,8 +4,10 @@ import com.reddit.RedditClone.dto.CommunityDTO;
 import com.reddit.RedditClone.dto.PostDTO;
 import com.reddit.RedditClone.model.Community;
 import com.reddit.RedditClone.model.Post;
+import com.reddit.RedditClone.model.User;
 import com.reddit.RedditClone.service.CommunityService;
 import com.reddit.RedditClone.service.PostService;
+import com.reddit.RedditClone.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,8 @@ public class PostController {
 
     @Autowired
     private PostService postService;
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private CommunityService communityService;
@@ -42,6 +46,8 @@ public class PostController {
         LocalDate lt = LocalDate.now();
         post.setCreationDate(lt);
         post.setCommunity(community);
+        User user = userService.findByUsername("jova");
+        post.setUser(user);
         community.addPost(post);
 
         post = postService.save(post);

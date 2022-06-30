@@ -24,6 +24,9 @@ public class Post {
     private String text;
     private LocalDate creationDate;
     private String imagePath;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId")
+    private User user;
     private Integer karma = 0;
 
     public Post(){}

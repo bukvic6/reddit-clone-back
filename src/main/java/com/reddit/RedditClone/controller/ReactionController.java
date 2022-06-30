@@ -44,8 +44,23 @@ public class ReactionController {
         Long id = Long.valueOf(1);
         Reaction reac = reactionService.findByUserId(post.getPostId(),id);
         if(reac != null){
-            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+            if (reac.getType().toString() == "UPVOTE"){
+                post.setKarma(post.getKarma() - 1);
+            }
+            if (reac.getType().toString() == "DOWNVOTE"){
+                post.setKarma(post.getKarma() + 1);
+            }
+            if(UPVOTE.equals(reactionDTO.getType())){
+                post.setKarma(post.getKarma() + 1);
+            } else {
 
+                post.setKarma(post.getKarma() - 1);
+            }
+            postService.save(post);
+            reac.setType(reactionDTO.getType());
+            reac = reactionService.save(reac);
+
+            return new ResponseEntity<>(new ReactionDTO(reac), HttpStatus.CREATED);
         }
         if(UPVOTE.equals(reactionDTO.getType())){
             post.setKarma(post.getKarma() + 1);

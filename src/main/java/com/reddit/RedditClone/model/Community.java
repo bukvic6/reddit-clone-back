@@ -22,6 +22,10 @@ public class Community {
 	@Column(nullable = false)
 	private String description;
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "userId")
+	private User user;
+
     @OneToMany(mappedBy = "community", fetch = FetchType.LAZY,  cascade = CascadeType.ALL)
 	private Set<Post> posts = new HashSet<Post>();
 
