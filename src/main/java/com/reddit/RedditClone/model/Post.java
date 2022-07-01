@@ -41,7 +41,7 @@ public class Post {
     }
 
 
-    @OneToMany(fetch = FetchType.LAZY,  cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY,  cascade = CascadeType.REMOVE)
     private Set<Reaction> reactions = new HashSet<Reaction>();
 
     public void setKarma(Integer karma) {

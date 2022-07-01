@@ -18,11 +18,11 @@ public class Reaction {
     private ReactionType type;
     private LocalDate timestamp;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId", referencedColumnName = "Id")
+    @JoinColumn(name = "userId")
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "postId", referencedColumnName = "postId")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "postId")
     private Post post;
 
 }

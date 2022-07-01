@@ -41,7 +41,7 @@ public class ReactionController {
         if (post == null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        Long id = Long.valueOf(1);
+        Long id = Long.valueOf(2);
         Reaction reac = reactionService.findByUserId(post.getPostId(),id);
         if(reac != null){
             if (reac.getType().toString() == "UPVOTE"){
@@ -70,7 +70,7 @@ public class ReactionController {
         }
         postService.save(post);
 
-        User user = userService.findByUsername("jova");
+        User user = userService.findByUsername("mika");
 
         Reaction reaction = new Reaction();
         LocalDate lt = LocalDate.now();
